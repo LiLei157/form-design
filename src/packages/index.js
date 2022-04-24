@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import MyHeader from './header/index'
-import FormDesign from './main/index'
+import FormDesign from './Main/index'
 
 const components = [
-    MyHeader,
-    FormDesign
+    FormDesign,
 ]
 
 export default {

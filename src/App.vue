@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <form-design></form-design>
+      <vue-form-design></vue-form-design>
   </div>
 </template>
 
@@ -15,5 +15,6 @@ export default {
   padding:0;
   margin:0;
   height:100vh;
+  box-sizing: border-box;
 }
 </style>
