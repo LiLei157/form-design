@@ -1,4 +1,5 @@
-import inputComponentList from './compnentsList/input/inputCom'
+import inputComponentList from './compnentsList/inputTypeList/index'
+import layoutTypeList from './compnentsList/layoutTypeList/index'
 
 const _config = [
     {
@@ -8,10 +9,10 @@ const _config = [
         componentList:inputComponentList
     },
     {
-        label:'选择型组件',
+        label:'布局组件',
         id:1,
         icon:'ios-construct',
-        
+        componentList:layoutTypeList
     }
 ]
 

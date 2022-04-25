@@ -7,12 +7,14 @@
           </div>
           <vue-draggable 
             class="list" 
-            :disabled="true"
             v-model="classifyItem.componentList" 
             animation="1000"
-            :group="{name:'draggable-list',pull:'clone',put:false}"
-            draggable=".draggable-item">
-                <div class="draggable-item" v-for="item in classifyItem.componentList" :key="item.id">
+            @start="drag = true"
+            @end="drag = false"
+            draggable=".draggable-item"
+            :group="{name:'FormDesign',pull:'clone',put:false}"
+            >
+                <div class="draggable-item" draggable v-for="item in classifyItem.componentList" :key="item.id">
                     <i-icon class="icon" :type="item.icon"></i-icon>
                     <span class="label">{{item.label}}</span>
                 </div>
@@ -30,7 +32,11 @@ export default {
     },
     data(){
         return {
-            LeftComponentList:LeftComponentList
+            drag:false,
+            LeftComponentList:LeftComponentList,
+            customComponents2: [
+                    {label:'第一项组件'}
+                ]
         }
     },
     mounted(){
@@ -42,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 .left-container{
     box-sizing: border-box;
-    width: 300px;
+    width: 350px;
     height: 100%;
     background-color: #fff;
     padding: 30px 15px;
@@ -69,7 +75,7 @@ export default {
                 margin-bottom: 8px;
                 font-size: 12px;
                 box-sizing: border-box;
-                padding-left: 15px;
+                padding-left: 12px;
                 border: 1px solid #f6f7ff;
                 .icon{
                     font-size: 16px;

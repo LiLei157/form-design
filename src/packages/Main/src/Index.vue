@@ -15,6 +15,19 @@
     import MidContainer from '../../components/MiddleContainer.vue';
     import RightContainer from '../../components/RightContainer.vue';
     export default {
+        data(){
+            return {
+                componentModel:{
+                    componentsList:[],
+                    model:{}
+                }
+            }
+        },
+        provide(){
+            return {
+                componentModel:this.componentModel
+            }
+        },
         components:{
             HeaderContainer,
             LeftContainer,
