@@ -1,28 +1,20 @@
 <template>
     <div class="middle-container">
         <div class="mid-view">
-            <vue-draggable class="drag-style" :group="{name:'FormDesign',pull:'clone',put:false}" v-model="customComponents" animation="300">
-                <div class="choose-list" style="height:200px" v-for="item in customComponents" :key="item.id">
-                    <div class="choose-item">
-                        {{item.label}}
+            <vue-draggable class="drag-style" group="FormDesign" v-model="customComponents" animation="300">
+                <div v-show="customComponents.length > 0">
+                    <div class="choose-item" v-for="(item,idx) in customComponents" :key="item.field" @click="handleClickItem(idx)">
+                        <div>
+                            {{item.label}}
+                        </div>
+                        <i-icon v-show="item.active" class="copy-icon" type="logo-buffer" />
+                        <i-icon v-show="item.active" class="delete-icon" type="ios-trash" @click="handleDelete(idx)"/>
                     </div>
+                </div>
+                <div class="drag-title" v-show="customComponents.length === 0">
+                    从左侧组件拖拽生成表单
                 </div>
             </vue-draggable>
-
-            <!-- <vue-draggable class="drag-style" :group="{name:'FormDesign',pull:'clone',put:false}" v-model="customComponents1" animation="300">
-                <div class="choose-list" style="height:200px" v-for="item in customComponents1" :key="item.id">
-                    <div class="choose-item">
-                        {{item.label}}
-                    </div>
-                </div>
-            </vue-draggable> -->
-            <!-- <vue-draggable class="drag-style" group="FormDesign" v-model="customComponents2" animation="300">
-                <div class="choose-list" style="height:200px" v-for="item in customComponents2" :key="item.id">
-                    <div class="choose-item">
-                        {{item.label}}
-                    </div>
-                </div>
-            </vue-draggable> -->
         </div>
     </div>
 </template>
@@ -36,10 +28,7 @@
         },
         data() {
             return {
-                drag: false,
-                customComponents: [
-                    {label:'第一项组件'}
-                ],
+                customComponents: [],
                 customComponents2: [
                     {label:'第一项组件'}
                 ]
@@ -47,6 +36,24 @@
         },
         mounted() {
             console.log('middle.....', this.componentModel)
+        },
+        methods:{
+            handleDelete(idx){
+                console.log(idx)
+                this.customComponents.splice(idx,1)
+            },
+            /**
+             * @description:点击组件项
+             */
+            handleClickItem(idx){
+                this.customComponents.map((item,index) =>{
+                    if(idx === index){
+                        this.$set(item,'active',true)
+                    }else{
+                        this.$set(item,'active',false)
+                    }
+                })
+            }
         }
     }
 </script>
@@ -56,7 +63,7 @@
         width: 100%;
         height: 100%;
         padding: 20px;
-
+        overflow: auto;
         .mid-view {
             box-sizing: border-box;
             background-color: #fff;
@@ -65,16 +72,59 @@
             box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
             display: flex;
             justify-content: space-between;
-
+            overflow: scroll;
             .drag-style{
                 width: 100%;
                 height: 100%;
-                overflow: auto;
                 .choose-item{
-                    height: 50px;
-                    width: 100%;
-                    margin-bottom: 10px;
-                    border: 1px dashed #333;
+                    position:relative;
+                    padding: 12px 10px;
+                    margin-bottom: 30px;
+                    transition: all .3s;
+                    .copy-icon,.delete-icon{
+                        width: 24px;
+                        height: 24px;
+                        font-size: 16px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        cursor: pointer;
+                        transition: all .3s;
+                    }
+                    .copy-icon{
+                        color: #2d8cf0;
+                        border: 1px solid #2d8cf0;
+                        right: 40px;
+                        top: -14px;
+                    }
+                    .delete-icon{
+                        right: 10px;
+                        top: -14px;
+                        color: #ed4014;
+                        border: 1px solid #ed4014;
+                    }
+                    .copy-icon:hover{
+                        color: #fff;
+                        background-color: #2d8cf0;
+                    }
+                    .delete-icon:hover{
+                        color: #fff;
+                        background-color: #ed4014;
+                    }
+                }
+                .choose-item:hover,.choose-item_active{
+                    background-color: #f6f7ff;
+                    border-radius: 6px;
+                }
+                .drag-title{
+                    color: #2d8cf0;
+                    font-size: 18px;
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }

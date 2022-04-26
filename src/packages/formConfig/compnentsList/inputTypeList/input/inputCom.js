@@ -2,19 +2,19 @@ import inputObj from './inputObject'
 export default [
     //文本输入
     inputObj({
-        id:'text_'+Date.now(),
+        id:'text_',
         label:'文本框',
         icon:'md-text',
         type:'text',
         'v-model':'model_'+Date.now(),
-        _slot:{
+        _slot_:{
             prepend:'prepend',
             append:'append' 
         }
     }),
     // 密码输入
     inputObj({
-        id:'pwd_'+Date.now(),
+        id:'pwd_',
         label:'密码框',
         icon:'md-eye',
         type:'password',
@@ -25,7 +25,7 @@ export default [
     }),
     // 多行文本
     inputObj({
-        id:'textarea_'+Date.now(),
+        id:'textarea_',
         type:'textarea',
         label:'多行文本',
         icon:'md-reorder',

@@ -46,6 +46,7 @@
         .main__wrap{
             flex: 1;
             display: flex;
+            overflow: auto;
         }
     }
 </style>
