@@ -4,7 +4,7 @@ const switchObj = (options) =>{
     return _.merge({
         id:'',
         active:false,
-        'v-model':false,
+        defaultVal:false,
         size:'default',
         tag:'i-switch',
         type:"switch",

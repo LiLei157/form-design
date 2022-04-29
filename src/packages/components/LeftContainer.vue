@@ -2,7 +2,7 @@
     <div class="left-container">
         <div class="classify-com-item" v-for="classifyItem in LeftComponentList" :key="classifyItem.id">
             <div class="classify-label">
-                <i-icon :type="classifyItem.icon"></i-icon>
+                <Icon :type="classifyItem.icon"></Icon>
                 <span style="margin-left:10px">{{classifyItem.label}}</span>
             </div>
             
@@ -14,7 +14,7 @@
                 draggable=".draggable-item" 
                 :group="{name:'FormDesign',pull:'clone',put:false}">
                 <div class="draggable-item" v-for="item in classifyItem.componentList" :key="item.id">
-                    <i-icon class="icon" :type="item.icon"></i-icon>
+                    <Icon class="icon" :type="item.icon"></Icon>
                     <span class="label">{{item.label}}</span>
                 </div>
             </vue-draggable>
@@ -44,7 +44,9 @@
                 console.log('clone...',obj)
                 let field = 'field_'+Date.now()
                 // 深拷贝当前拖拽对象属性，防止后期修改属性互相干扰，因为对象是对象引用
-                let newObj = _.assign(_.cloneDeep(obj),{field:field})
+                let newObj = _.assign(_.cloneDeep(obj),{field:field,'_formConfig_':{
+                    labelPosition:'right'
+                }})
                 console.log('field: ',newObj.field)
                 return newObj
             }

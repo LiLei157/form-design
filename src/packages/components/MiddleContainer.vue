@@ -3,13 +3,17 @@
         <div class="mid-view">
             <vue-draggable class="drag-style" group="FormDesign" v-model="customComponents" animation="300">
                 <div v-show="customComponents.length > 0">
-                    <div class="choose-item" v-for="(item,idx) in customComponents" :key="item.field" @click="handleClickItem(idx)">
-                        <div>
+                    <Form >
+                        <FormItem class="choose-item" v-for="(item,idx) in customComponents" :key="item.field" @click.native="handleClickItem(idx)">
                             {{item.label}}
-                        </div>
-                        <i-icon v-show="item.active" class="copy-icon" type="logo-buffer" />
-                        <i-icon v-show="item.active" class="delete-icon" type="ios-trash" @click="handleDelete(idx)"/>
-                    </div>
+                            <Icon v-show="item.active" class="copy-icon" type="logo-buffer" />
+                            <Icon v-show="item.active" class="delete-icon" type="ios-trash" @click="handleDelete(idx)"/>
+                        </FormItem>
+                    </Form>
+                    <!-- <div class="choose-item" v-for="(item,idx) in customComponents" :key="item.field" @click="handleClickItem(idx)">
+                        
+                    </div> -->
+                   
                 </div>
                 <div class="drag-title" v-show="customComponents.length === 0">
                     从左侧组件拖拽生成表单
@@ -21,10 +25,12 @@
 
 <script>
     import VueDraggable from 'vuedraggable'
+    // import FormContainer from './Form/FormContainer.vue'
     export default {
         inject: ['componentModel'],
         components: {
-            VueDraggable
+            VueDraggable,
+            // FormContainer
         },
         data() {
             return {
@@ -32,6 +38,12 @@
                 customComponents2: [
                     {label:'第一项组件'}
                 ]
+            }
+        },
+        watch:{
+            customComponents(newArr){
+                console.log('watch..',newArr)
+                this.$emit('changeComponents',newArr)
             }
         },
         mounted() {
@@ -46,6 +58,7 @@
              * @description:点击组件项
              */
             handleClickItem(idx){
+                console.log('.......')
                 this.customComponents.map((item,index) =>{
                     if(idx === index){
                         this.$set(item,'active',true)

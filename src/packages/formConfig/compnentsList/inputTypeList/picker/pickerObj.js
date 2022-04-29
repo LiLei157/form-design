@@ -13,6 +13,7 @@ const datePickerObj = (options)=>{
         tag:'date-picker',
         label:'日期选择器',
         icon:'ios-calendar',
+        span:24,// i-col span栅格属性
         'v-model':null,
         format:'',
         placeholder:'请输入',
@@ -34,11 +35,14 @@ const datePickerObj = (options)=>{
  */
 const timePickerObj = (options) =>{
     return _.merge({
-        id:'',
+        id:'',//唯一标识,也可v-model属性
+        defaultVal:null,
         type:'',
         active:false,
-        'v-model':null,
+        span:24,// i-col span栅格属性
         format:'',
+        labelWidth:120,
+        required:true,
         label:'时间选择器',
         icon:'md-alarm',
         steps:[],

@@ -3,9 +3,12 @@ import _ from 'lodash'
 const radioObj = (options) =>{
     return _.merge({
         id:'',
-        'v-model':[],
+        defaultVal:'',
         active:false,
         label:'单选框',
+        labelWidth:120,
+        required:true,
+        span:24,
         icon:'md-radio-button-on',
         tag:'i-radio-group',
         childTag:'i-radio',//子标签名
